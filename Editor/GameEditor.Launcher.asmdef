@@ -2,7 +2,8 @@
     "name": "GameEditor.Launcher",
     "rootNamespace": "",
     "references": [
-        "NovaFramework.SharpZipLib"
+        "NovaFramework.SharpZipLib",
+        "NovaEditor.Common"
     ],
     "includePlatforms": [
         "Editor"
