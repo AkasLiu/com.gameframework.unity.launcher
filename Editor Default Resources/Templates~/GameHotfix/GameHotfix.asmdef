@@ -1,0 +1,32 @@
+{
+    "name": "GameHotfix",
+    "rootNamespace": "",
+    "references": [
+        "GooAsset",
+        "NovaFramework.UniTask",
+        "NovaFramework.Luban",
+        "NovaFramework.FairyGUI",
+        "NovaFramework.Protobuf",
+        "NovaFramework.Protobuf.Extension",
+        "NovaEngine.Kernel",
+        "NovaEngine.Basic",
+        "NovaEngine.Import",
+        "GameFramework.View.Ugui",
+        "GameFramework.View.Fairygui",
+        "Agen",
+        "Game",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Game.Module.Asset.NameSearcher"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "GAME_COMPILE || UNITY_EDITOR"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
