@@ -1,0 +1,31 @@
+{
+    "name": "Game",
+    "rootNamespace": "",
+    "references": [
+        "GooAsset",
+        "NovaFramework.UniTask",
+        "NovaFramework.Luban",
+        "NovaFramework.Protobuf",
+        "NovaFramework.Protobuf.Extension",
+        "NovaFramework.FairyGUI",
+        "NovaEngine.Kernel",
+        "NovaEngine.Basic",
+        "NovaEngine.Import",
+        "GameFramework.Protocol.Protobuf",
+        "GameFramework.Protocol.Streambuf",
+        "GameFramework.View.Ugui",
+        "GameFramework.View.Fairygui",
+        "Agen"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "GAME_COMPILE || UNITY_EDITOR"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
