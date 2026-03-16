@@ -11,86 +11,66 @@ using System;
 namespace Game
 {
     /// <summary>
-    /// 全局输入绑定函数的属性类型定义
+    /// 输入绑定函数的属性类型定义
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class OnGlobalInputAttribute : GameEngine.OnInputDispatchCallAttribute
+    public class OnInputAttribute : GameEngine.OnInputDispatchCallAttribute
     {
-        public OnGlobalInputAttribute(int inputCode) : base(inputCode) { }
+        public OnInputAttribute(int inputCode) : base(inputCode, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnGlobalInputAttribute(int inputCode, GameEngine.InputOperationType inputOperationType) : base(inputCode, inputOperationType) { }
+        public OnInputAttribute(int inputCode, GameEngine.InputOperationType inputOperationType) : base(inputCode, inputOperationType, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnGlobalInputAttribute(Type inputDataType) : base(inputDataType) { }
+        public OnInputAttribute(Type inputDataType) : base(inputDataType, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnGlobalInputAttribute(Type classType, int inputCode) : base(classType, inputCode) { }
+        public OnInputAttribute(Type classType, int inputCode) : base(classType, inputCode) { }
 
-        public OnGlobalInputAttribute(Type classType, int inputCode, GameEngine.InputOperationType inputOperationType) : base(classType, inputCode, inputOperationType) { }
+        public OnInputAttribute(Type classType, int inputCode, GameEngine.InputOperationType inputOperationType) : base(classType, inputCode, inputOperationType) { }
 
-        public OnGlobalInputAttribute(Type classType, Type inputDataType) : base(classType, inputDataType) { }
+        public OnInputAttribute(Type classType, Type inputDataType) : base(classType, inputDataType) { }
     }
 
     /// <summary>
-    /// 对象输入绑定函数的属性类型定义
+    /// 事件绑定函数的属性类型定义
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class OnBeanInputAttribute : GameEngine.InputResponseBindingOfTargetAttribute
+    public class OnEventAttribute : GameEngine.OnEventDispatchCallAttribute
     {
-        public OnBeanInputAttribute(int inputCode) : base(inputCode, GameEngine.AspectBehaviourType.Startup) { }
+        public OnEventAttribute(int eventID) : base(eventID, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnBeanInputAttribute(int inputCode, GameEngine.InputOperationType inputOperationType) : base(inputCode, inputOperationType, GameEngine.AspectBehaviourType.Startup) { }
+        public OnEventAttribute(Type eventDataType) : base(eventDataType, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnBeanInputAttribute(Type inputDataType) : base(inputDataType, GameEngine.AspectBehaviourType.Startup) { }
+        public OnEventAttribute(Type classType, int eventID) : base(classType, eventID) { }
+
+        public OnEventAttribute(Type classType, Type eventDataType) : base(classType, eventDataType) { }
     }
 
     /// <summary>
-    /// 全局事件绑定函数的属性类型定义
+    /// 消息绑定函数的属性类型定义
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class OnGlobalEventAttribute : GameEngine.OnEventDispatchCallAttribute
+    public class OnMessageAttribute : GameEngine.OnMessageDispatchCallAttribute
     {
-        public OnGlobalEventAttribute(int eventID) : base(eventID) { }
+        public OnMessageAttribute(int opcode) : base(opcode, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnGlobalEventAttribute(Type eventDataType) : base(eventDataType) { }
+        public OnMessageAttribute(Type messageType) : base(messageType, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnGlobalEventAttribute(Type classType, int eventID) : base(classType, eventID) { }
+        public OnMessageAttribute(Type classType, int opcode) : base(classType, opcode) { }
 
-        public OnGlobalEventAttribute(Type classType, Type eventDataType) : base(classType, eventDataType) { }
+        public OnMessageAttribute(Type classType, Type messageType) : base(classType, messageType) { }
     }
 
     /// <summary>
-    /// 对象事件绑定函数的属性类型定义
+    /// 同步绑定函数的属性类型定义
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class OnBeanEventAttribute : GameEngine.EventSubscribeBindingOfTargetAttribute
+    public class OnReplicateAttribute : GameEngine.OnReplicateDispatchCallAttribute
     {
-        public OnBeanEventAttribute(int eventID) : base(eventID, GameEngine.AspectBehaviourType.Startup) { }
+        public OnReplicateAttribute(string tags) : base(tags, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnBeanEventAttribute(Type eventDataType) : base(eventDataType, GameEngine.AspectBehaviourType.Startup) { }
-    }
+        public OnReplicateAttribute(string tags, GameEngine.ReplicateAnnounceType announceType) : base(tags, announceType, GameEngine.AspectBehaviourType.Startup) { }
 
-    /// <summary>
-    /// 全局消息绑定函数的属性类型定义
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class OnGlobalMessageAttribute : GameEngine.OnMessageDispatchCallAttribute
-    {
-        public OnGlobalMessageAttribute(int opcode) : base(opcode) { }
+        public OnReplicateAttribute(Type classType, string tags) : base(classType, tags) { }
 
-        public OnGlobalMessageAttribute(Type messageType) : base(messageType) { }
-
-        public OnGlobalMessageAttribute(Type classType, int opcode) : base(classType, opcode) { }
-
-        public OnGlobalMessageAttribute(Type classType, Type messageType) : base(classType, messageType) { }
-    }
-
-    /// <summary>
-    /// 对象消息绑定函数的属性类型定义
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class OnBeanMessageAttribute : GameEngine.MessageListenerBindingOfTargetAttribute
-    {
-        public OnBeanMessageAttribute(int opcode) : base(opcode, GameEngine.AspectBehaviourType.Startup) { }
-
-        public OnBeanMessageAttribute(Type messageType) : base(messageType, GameEngine.AspectBehaviourType.Startup) { }
+        public OnReplicateAttribute(Type classType, string tags, GameEngine.ReplicateAnnounceType announceType) : base(classType, tags, announceType) { }
     }
 }

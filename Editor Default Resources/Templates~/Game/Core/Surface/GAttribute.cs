@@ -11,13 +11,22 @@ using System;
 namespace Game
 {
     /// <summary>
-    /// 编程接口分发类型注册函数的属性类型定义
+    /// 全局编程接口分发类型注册函数的属性类型定义
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public class OnApiFunctionAttribute : GameEngine.OnApiDispatchCallAttribute
+    public class OnGlobalApiAttribute : GameEngine.OnApiDispatchCallAttribute
     {
-        public OnApiFunctionAttribute(string functionName) : base(functionName) { }
+        public OnGlobalApiAttribute(string functionName) : base(functionName) { }
 
-        public OnApiFunctionAttribute(Type classType, string functionName) : base(classType, functionName) { }
+        public OnGlobalApiAttribute(Type classType, string functionName) : base(classType, functionName) { }
+    }
+
+    /// <summary>
+    /// 对象编程接口分发类型注册函数的属性类型定义
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+    public class OnBeanApiAttribute : GameEngine.ApiFunctionBindingOfTargetAttribute
+    {
+        public OnBeanApiAttribute(string functionName) : base(functionName) { }
     }
 }
