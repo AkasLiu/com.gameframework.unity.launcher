@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "NovaFramework.SharpZipLib",
-        "NovaEditor.Common"
+        "NovaEditor.Common",
+        "NovaFramework.Configure"
     ],
     "includePlatforms": [
         "Editor"

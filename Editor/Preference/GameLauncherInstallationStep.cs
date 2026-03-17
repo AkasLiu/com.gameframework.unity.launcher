@@ -1,24 +1,27 @@
+
+
 using System;
 using System.IO;
 using System.Linq;
-using UnityEngine;
+using NovaFramework.Serialization;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace NovaFramework.Editor.Preference
 {
-    public class LauncherInstallationStep : InstallationStep
+    public class GameLauncherInstallationStep : InstallationStep
     {
-        public void Install(Action onMessage, Action onComplete, Action onError, Action<string> addLog = null)
+        public void Install(Action onComplete, Action onError)
         {
             try
             {
-                addLog?.Invoke("LauncherInstallationStep: 开始执行安装步骤");
+                Debug.Log("LauncherInstallationStep: 开始执行安装步骤");
 
                 //1.拷贝Templates~文件夹代码到Sources目录
                 string moduleName = "com.gameframework.unity.launcher";
-                string curModulePath = PersistencePath.CurrentUsingRepositoryUrlOfTargetModule(moduleName);
+                string curModulePath = PersistencePath.FindModuleFolderByPackageName(moduleName);
                 string curTemplatesDirPath = Application.dataPath + "/../" + curModulePath + "/Editor Default Resources/Templates~";
                 string curGUIDirPath = Application.dataPath + "/../" + curModulePath + "/Editor Default Resources/GUI";
                 string sourcesPath = Path.Combine(Application.dataPath, "..", "Assets/Sources").Replace("\\", "/");
@@ -28,11 +31,11 @@ namespace NovaFramework.Editor.Preference
                 if (Directory.Exists(curTemplatesDirPath))
                 {
                     DirectoryCopy(curTemplatesDirPath, sourcesPath);
-                    addLog?.Invoke("已拷贝模板代码到 Assets/Sources");
+                    Debug.Log("已拷贝模板代码到 Assets/Sources");
                 }
                 else
                 {
-                    addLog?.Invoke($"Templates~ 目录不存在: {curTemplatesDirPath}");
+                    Debug.Log($"Templates~ 目录不存在: {curTemplatesDirPath}");
                 }
                 
                 //2. 创建主场景到Scenes目录
@@ -49,50 +52,49 @@ namespace NovaFramework.Editor.Preference
                 
                 // 保存新创建的场景到目标路径
                 EditorSceneManager.SaveScene(newScene, destScenePath);
-                addLog?.Invoke("已创建主场景 Assets/Scenes/main.unity");
+                Debug.Log("已创建主场景 Assets/Scenes/main.unity");
                 
-                // 3. 复制DLL到AOT/Windows目录
-                // string sourceAotPath = Path.Combine(curModulePath, "Editor Default Resources/Aot/Windows").Replace("\\", "/");
-                // if (Directory.Exists(sourceAotPath))
-                // {
-                //     string aotDestPath = "Assets/_Resources/Aot/Windows";
-                //     var aotPathVar = EnvironmentConfigures.Instance.variables.FirstOrDefault(v => v.key == "AOT_LIBRARY_PATH");
-                //     if (aotPathVar != null && !string.IsNullOrEmpty(aotPathVar.value))
-                //     {
-                //         aotDestPath = Path.Combine(aotPathVar.value, "Windows").Replace("\\", "/");
-                //     }
-                //
-                //     string aotAbsPath = Path.Combine(Application.dataPath, "..", aotDestPath).Replace("\\", "/");
-                //     DirectoryCopy(sourceAotPath, aotAbsPath);
-                //
-                //     string[] dllFiles = Directory.GetFiles(sourceAotPath, "*.dll.bytes");
-                //     addLog?.Invoke($"已复制 {dllFiles.Length} 个AOT库文件到 {aotDestPath}");
-                // }
-                // else
-                // {
-                //     addLog?.Invoke($"AOT源目录不存在，跳过DLL复制: {sourceAotPath}");
-                // }
+                //3. 复制DLL到AOT/Windows目录
+                string sourceAotPath = Path.Combine(curModulePath, "Editor Default Resources/Aot/Windows").Replace("\\", "/");
+                if (Directory.Exists(sourceAotPath))
+                {
+                    string aotDestPath = "Assets/_Resources/Aot/Windows";
+                    var aotPathVar = EnvironmentConfigures.Instance.variables.FirstOrDefault(v => v.key == "AOT_LIBRARY_PATH");
+                    if (aotPathVar != null && !string.IsNullOrEmpty(aotPathVar.value))
+                    {
+                        aotDestPath = Path.Combine(aotPathVar.value, "Windows").Replace("\\", "/");
+                    }
+                
+                    string aotAbsPath = Path.Combine(Application.dataPath, "..", aotDestPath).Replace("\\", "/");
+                    DirectoryCopy(sourceAotPath, aotAbsPath);
+                
+                    string[] dllFiles = Directory.GetFiles(sourceAotPath, "*.dll.bytes");
+                    Debug.Log($"已复制 {dllFiles.Length} 个AOT库文件到 {aotDestPath}");
+                }
+                else
+                {
+                    Debug.Log($"AOT源目录不存在，跳过DLL复制: {sourceAotPath}");
+                }
 
                 // 4.复制默认资源
                 if (Directory.Exists(curGUIDirPath))
                 {
                     DirectoryCopy(curGUIDirPath, _ResourcesPath);
-                    addLog?.Invoke("已拷贝GUI到 Assets/_Resources/GUI");
+                    Debug.Log("已拷贝GUI到 Assets/_Resources/GUI");
                 }
                 else
                 {
-                    addLog?.Invoke($"GUI 目录不存在: {curGUIDirPath}");
+                    Debug.Log($"GUI 目录不存在: {curGUIDirPath}");
                 }
                 
                 AssetDatabase.Refresh();
                 
                 onComplete?.Invoke();
-                onMessage?.Invoke();
             }
             catch (Exception e)
             {
                 onError?.Invoke();
-                addLog?.Invoke($"安装过程中发生错误: {e.Message}");
+                Debug.Log($"安装过程中发生错误: {e.Message}");
             }
         }
 
@@ -113,7 +115,7 @@ namespace NovaFramework.Editor.Preference
             }
         }
         
-        public void Uninstall(Action onMessage, Action onComplete, Action onError)
+        public void Uninstall(Action onComplete, Action onError)
         {
             Debug.Log("LauncherInstallationStep: 执行卸载步骤");
 
@@ -144,7 +146,6 @@ namespace NovaFramework.Editor.Preference
             AssetDatabase.Refresh();
 
             onComplete?.Invoke();
-            onMessage?.Invoke();
         }
 
         private static void DeleteMetaFile(string path)
