@@ -2,18 +2,16 @@
 /// Game Framework
 /// 
 /// 创建者：Hurley
-/// 创建时间：2025-07-22
+/// 创建时间：2025-06-24
 /// 功能描述：
 /// </summary>
 
 namespace Game
 {
     /// <summary>
-    /// 业务层二次封装的原生对象类<br/>
-    /// 需要注意的是，在FairyGUI库中，也有一个同名的<see cref="FairyGUI.GObject"/><br/>
-    /// 所以在引用的时候，需要注意使用的命名空间
+    /// 业务层二次封装的场景对象类
     /// </summary>
-    public class GObject : GameEngine.CObject
+    public class UScene : GameEngine.CScene
     {
         // protected override void OnInitialize() { }
 

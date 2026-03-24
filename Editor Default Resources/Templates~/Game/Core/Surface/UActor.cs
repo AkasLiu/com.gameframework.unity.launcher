@@ -9,9 +9,9 @@
 namespace Game
 {
     /// <summary>
-    /// 业务层二次封装的场景对象类
+    /// 业务层二次封装的角色对象类
     /// </summary>
-    public class GScene : GameEngine.CScene
+    public class UActor : GameEngine.CActor
     {
         // protected override void OnInitialize() { }
 

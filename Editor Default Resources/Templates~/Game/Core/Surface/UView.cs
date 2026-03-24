@@ -11,7 +11,7 @@ namespace Game
     /// <summary>
     /// 业务层二次封装的视图对象类
     /// </summary>
-    public class GView : GameEngine.CView
+    public class UView : GameEngine.CView
     {
         // protected override void OnInitialize() { }
 
