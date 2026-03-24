@@ -16,15 +16,15 @@ namespace Game
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public class OnInputAttribute : GameEngine.OnInputDispatchCallAttribute
     {
-        public OnInputAttribute(int inputCode) : base(inputCode, GameEngine.AspectBehaviourType.Startup) { }
+        public OnInputAttribute(GameEngine.VirtualKeyCode keyCode) : base(keyCode, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnInputAttribute(int inputCode, GameEngine.InputOperationType inputOperationType) : base(inputCode, inputOperationType, GameEngine.AspectBehaviourType.Startup) { }
+        public OnInputAttribute(GameEngine.VirtualKeyCode keyCode, GameEngine.InputOperationType inputOperationType) : base(keyCode, inputOperationType, GameEngine.AspectBehaviourType.Startup) { }
 
         public OnInputAttribute(Type inputDataType) : base(inputDataType, GameEngine.AspectBehaviourType.Startup) { }
 
-        public OnInputAttribute(Type classType, int inputCode) : base(classType, inputCode) { }
+        public OnInputAttribute(Type classType, GameEngine.VirtualKeyCode keyCode) : base(classType, keyCode) { }
 
-        public OnInputAttribute(Type classType, int inputCode, GameEngine.InputOperationType inputOperationType) : base(classType, inputCode, inputOperationType) { }
+        public OnInputAttribute(Type classType, GameEngine.VirtualKeyCode keyCode, GameEngine.InputOperationType inputOperationType) : base(classType, keyCode, inputOperationType) { }
 
         public OnInputAttribute(Type classType, Type inputDataType) : base(classType, inputDataType) { }
     }

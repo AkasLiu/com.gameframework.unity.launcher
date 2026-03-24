@@ -48,7 +48,7 @@ namespace Game
             foreach (Type type in configTypes)
             {
                 string fileName = type.Name[..^11].ToLower(); // 去除最后11个字符:ConfigTable  //"tb" + type.Name[..^11].ToLower(); // 去除最后11个字符:ConfigTable
-                Asset asset = ResourceHandler.Instance.LoadAssetAsync<TextAsset>($"{filePath}/{fileName}.bytes", obj =>
+                Asset asset = ResourceHandler.Instance.AsyncLoadAsset<TextAsset>($"{filePath}/{fileName}.bytes", obj =>
                 {
                     IConfigRegister table = Activator.CreateInstance(type, new ByteBuf(((TextAsset) obj)?.bytes)) as IConfigRegister;
                     table?.Register();

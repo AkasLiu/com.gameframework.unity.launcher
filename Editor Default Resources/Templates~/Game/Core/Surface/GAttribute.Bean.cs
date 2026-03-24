@@ -7,7 +7,6 @@
 /// </summary>
 
 using System;
-using GameEngine;
 
 namespace Game
 {
@@ -17,6 +16,8 @@ namespace Game
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class GObjectClassAttribute : GameEngine.CObjectClassAttribute
     {
+        public GObjectClassAttribute() : base() { }
+
         public GObjectClassAttribute(string viewName) : base(viewName) { }
 
         public GObjectClassAttribute(int priority) : base(priority) { }
@@ -30,6 +31,8 @@ namespace Game
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class GSceneClassAttribute : GameEngine.CSceneClassAttribute
     {
+        public GSceneClassAttribute() : base() { }
+
         public GSceneClassAttribute(string viewName) : base(viewName) { }
 
         public GSceneClassAttribute(int priority) : base(priority) { }
@@ -43,6 +46,8 @@ namespace Game
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class GActorClassAttribute : GameEngine.CActorClassAttribute
     {
+        public GActorClassAttribute() : base() { }
+
         public GActorClassAttribute(string viewName) : base(viewName) { }
 
         public GActorClassAttribute(int priority) : base(priority) { }
@@ -56,6 +61,8 @@ namespace Game
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class GViewClassAttribute : GameEngine.CViewClassAttribute
     {
+        public GViewClassAttribute() : base() { }
+
         public GViewClassAttribute(string viewName) : base(viewName) { }
 
         public GViewClassAttribute(int priority) : base(priority) { }
@@ -69,6 +76,8 @@ namespace Game
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class GComponentClassAttribute : GameEngine.CComponentClassAttribute
     {
+        public GComponentClassAttribute() : base() { }
+
         public GComponentClassAttribute(string viewName) : base(viewName) { }
 
         public GComponentClassAttribute(int priority) : base(priority) { }
@@ -97,6 +106,6 @@ namespace Game
 
         public GComponentAutomaticActivationOfEntityAttribute(Type referenceType, int priority) : base(referenceType, priority) { }
 
-        public GComponentAutomaticActivationOfEntityAttribute(Type referenceType, int priority, AspectBehaviourType activationBehaviourType) : base(referenceType, priority, activationBehaviourType) { }
+        public GComponentAutomaticActivationOfEntityAttribute(Type referenceType, int priority, GameEngine.AspectBehaviourType activationBehaviourType) : base(referenceType, priority, activationBehaviourType) { }
     }
 }

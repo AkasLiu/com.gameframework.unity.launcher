@@ -38,7 +38,7 @@ namespace Game
                 Debugger.Log("加载配置{%s}", url);
                 // UnityEngine.TextAsset textAsset = GameEngine.ResourceHandler.Instance.LoadAsset($"{filePath}/{path}.xml", typeof(UnityEngine.TextAsset)) as UnityEngine.TextAsset;
                 // UnityEngine.TextAsset textAsset = GameEngine.ResourceHandler.Instance.LoadAsset(url, typeof(UnityEngine.TextAsset)) as UnityEngine.TextAsset;
-                UnityEngine.TextAsset textAsset = await GameEngine.ResourceHandler.Instance.LoadAssetAsync<UnityEngine.TextAsset>(url);
+                UnityEngine.TextAsset textAsset = await GameEngine.ResourceHandler.Instance.AsyncLoadAsset<UnityEngine.TextAsset>(url);
                 string text = textAsset.text;
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
                 ms.Write(buffer, 0, buffer.Length);
