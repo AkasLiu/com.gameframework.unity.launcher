@@ -25,7 +25,7 @@ namespace Game
 
         private static async UniTask LoadApplicationConfigures()
         {
-            await GameEngine.ApplicationContext.LoadApplicationConfigure(@"application", async (path, ms) =>
+            await GameEngine.ApplicationContext.Configure.LoadApplicationConfigure(@"application", async (path, ms) =>
             {
                 string filePath = NovaEngine.Environment.GetSystemPath("CONTEXT_PATH"); // , $"{path}.xml");
                 if (string.IsNullOrEmpty(filePath))
@@ -52,7 +52,7 @@ namespace Game
 
         private static void LoadBeanConfigures()
         {
-            GameEngine.ApplicationContext.LoadBeanConfigure(@"bean", (path, ms) =>
+            GameEngine.ApplicationContext.Configure.LoadBeanConfigure(@"bean", (path, ms) =>
             {
                 string filePath = NovaEngine.Environment.GetSystemPath("CONTEXT_PATH"); // , $"{path}.xml");
                 if (string.IsNullOrEmpty(filePath))
